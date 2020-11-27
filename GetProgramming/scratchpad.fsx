@@ -133,3 +133,22 @@ let getDirectoryAge =
 Place related types together in namespaces
 Place related stateless functions together in modules
 *)
+
+type Customer = 
+    { Age: int
+      Name: string }
+
+let printAge customer =
+    if customer.Age >= 18 then Console.WriteLine("Adult")
+    elif customer.Age >= 13 then Console.Write("TeenAger")
+    else Console.WriteLine("Child")
+
+let printAge2 writer customer = 
+    if customer.Age >= 18 then writer "Adult"
+    elif customer.Age >= 13 then writer "TeenAger"
+    else writer "Child"
+
+let writeTextToFile text = File.WriteAllText(@"C:\Work\FSharp\output.txt", text)
+
+let printToConsoleAge customer = printAge2 Console.WriteLine customer
+let writeToFileAge customer = printAge2 writeTextToFile customer
