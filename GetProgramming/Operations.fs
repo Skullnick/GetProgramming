@@ -1,6 +1,14 @@
-﻿module Operations
+﻿
+
+module Operations
 
 open Domain
 
-let getInitials customer = customer.FirstName.[0], customer.LastName.[0]
-let isOlderThan age customer = customer.Age > age
+let deposit (amount: decimal) (account: Account) = 
+    {account with Balance = account.Balance + amount}
+
+let withdraw (amount: decimal) (account: Account) =
+    if account.Balance >= amount && amount > 0M && account.Balance >= 0M then
+        { account with Balance = account.Balance - amount }
+    else
+        account

@@ -1,14 +1,13 @@
 ﻿namespace Domain
 
 type Customer =
-    { FirstName : string
-      LastName: string
-      Age: int
+    { Name : string
       Id: System.Guid
     }
 
 type Account = 
-    { CustomerID: System.Guid
-      Balance: float
+    { AccountID: System.Guid 
+      Customer: Customer
+      Balance: decimal
     }
 
