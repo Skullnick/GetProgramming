@@ -140,7 +140,7 @@ type Customer =
 
 let printAge customer =
     if customer.Age >= 18 then Console.WriteLine("Adult")
-    elif customer.Age >= 13 then Console.Write("TeenAger")
+    elif customer.Age >= 13 then Console.WriteLine("TeenAger")
     else Console.WriteLine("Child")
 
 let printAge2 writer customer = 
@@ -152,3 +152,9 @@ let writeTextToFile text = File.WriteAllText(@"C:\Work\FSharp\output.txt", text)
 
 let printToConsoleAge customer = printAge2 Console.WriteLine customer
 let writeToFileAge customer = printAge2 writeTextToFile customer
+
+(* Unit 4 - Lesson 15*)
+
+let myArray = [|1; 2; 3; 4; 5|]
+let myList = [1; 2; 3; 4; 5]
+let newList = myList @ myList
