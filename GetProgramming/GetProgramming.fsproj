@@ -6,6 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="FolderDomain.fs" />
+    <Compile Include="FolderOperations.fs" />
     <None Include="scratchpad.fsx" />
     <Compile Include="Domain.fs" />
     <Compile Include="Operations.fs" />

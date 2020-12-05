@@ -1,7 +1,5 @@
 ﻿module FolderOperations
 
-open FolderDomain
-open System
 open System.IO
   
 let isValid path = 
@@ -28,20 +26,20 @@ let rec getFolderSize (path: string) =
     dirSize + fileSize
 
 let getAverageFileSize path =
-    let dir = Directory.GetDirectories path
-                |> Array.map getFolderSize
-    let files = Directory.GetFiles path
-                |> Array.map (fun  x -> FileInfo(x).Length)
-    
-    let totalCount = float(dir.Length + files.Length)
-    let totalSize = float(Array.sum dir + Array.sum files)
-    let averageFileSize = if totalCount <> 0.0 then totalSize / totalCount else 0.0
-
-    averageFileSize
+    let folders = Directory.GetDirectories path |> Array.map getFolderSize
+    let files = Directory.GetFiles path |> Array.map (fun  x -> FileInfo(x).Length)  
+    let totalCount = float(folders.Length + files.Length)
+    let totalSize = float(Array.sum folders + Array.sum files)
+    if totalCount <> 0.0 then totalSize / totalCount else 0.0
 
 let getDistinctFileExtensions path = 
     Directory.GetFiles path
         |> Array.map (fun  x -> FileInfo(x).Extension)
         |> Array.distinct
     
+let getFolderList path = 
+    Directory.GetDirectories path 
+    |> Array.toList
+    |> List.map (fun x -> (x, getFolderSize x))
+    |> List.sortBy (fun (path, size) -> -size)
 
