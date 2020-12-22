@@ -1,3 +1,5 @@
 GetProgramming/bin
 GetProgramming/obj
 .vs/
+.ionide/
+.fake

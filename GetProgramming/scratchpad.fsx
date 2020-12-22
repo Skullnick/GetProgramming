@@ -158,3 +158,44 @@ let writeToFileAge customer = printAge2 writeTextToFile customer
 let myArray = [|1; 2; 3; 4; 5|]
 let myList = [1; 2; 3; 4; 5]
 let newList = myList @ myList
+let anotherList = 4 :: newList
+
+let rec append value list = 
+    match list with
+    | [] -> [value]
+    | head :: tail -> head :: append value tail
+
+
+(* Unit 4 - Lesson 16*)
+// map - mapping:('T -> 'U) -> list:'T list -> 'U list
+let numbers = [1..10]
+let double x = x * 2
+List.map double numbers
+
+// iter - action:('T -> 'unit) -> list:'T list -> unit
+// same as map but U = unit
+List.iter print numbers
+
+
+(* Unit 4 - Lesson 18*)
+let test  = [1; 2; 3; 9; 2; 3; 4; 0]
+
+let rec countElementsRec (inputList: int list) = 
+    match inputList with
+    | [] -> failwith "List is empty"
+    | [el] -> 1
+    | head::tail -> 1 + (countElementsRec tail)
+
+let rec getMaxRec (inputList: int list) = 
+    match inputList with
+    | [] -> failwith "List is empty"
+    | [el] -> el
+    | head::tail -> max head (getMaxRec tail)
+    
+let countElements inputList = 
+    List.fold (fun state input -> state + 1) 0 inputList
+
+let getMax (inputList: int list) =
+    match inputList with
+    | [] -> failwith "List is empty"
+    | head::tail -> List.fold (fun state input -> if input > state then input else state) head tail

@@ -13,16 +13,8 @@ let isFolder path =
         failwith "Invalid Path"    
 
 let rec getFolderSize (path: string) =
-    let dirSize = 
-        Directory.GetDirectories path
-        |> Array.map getFolderSize
-        |> Array.sum
-
-    let fileSize = 
-        Directory.GetFiles path
-        |> Array.map (fun  x -> FileInfo(x).Length)
-        |> Array.sum
-
+    let dirSize = Array.sumBy getFolderSize (Directory.GetDirectories path)
+    let fileSize = Array.sumBy (fun  x -> FileInfo(x).Length) (Directory.GetFiles path)
     dirSize + fileSize
 
 let getAverageFileSize path =

@@ -15,12 +15,12 @@ let createAccountFile (account:Account)=
     let folderPath = getAccountFolderPath account
     let filePath = getAccountFilePath account
     let accountCreationMessage = "Account: " + string account.AccountID + " created."
-    if Directory.Exists folderPath = false then Directory.CreateDirectory folderPath |> ignore
-    if File.Exists(filePath) = false then File.WriteAllText(filePath, accountCreationMessage + Environment.NewLine)
+    if not (Directory.Exists folderPath) then Directory.CreateDirectory folderPath |> ignore
+    if not (File.Exists(filePath)) then File.WriteAllText(filePath, accountCreationMessage + Environment.NewLine)
 
 let auditToFile (account: Account) (message: string) =
     let filePath = getAccountFilePath account
-    if File.Exists filePath = false then createAccountFile account
+    if not (File.Exists filePath) then createAccountFile account
     File.AppendAllText(filePath, message + Environment.NewLine)
 
 let auditToConsole (account: Account) (message: string) =
